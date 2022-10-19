@@ -1,54 +1,129 @@
+<br>
 
-# Game Library [![Badge License]][License]
-
-*A game library extension for* ***[EmulatorJS]***
+# Data Folder
 
 <br>
 
-This add - on reads the contents of your **ROM**s <br>
-folder and uses it to display a games library. Roms <br>
-with common endings, like .iso, .bin or .zip, you <br>
-must also include the applicable extension before it. <br>
-A list is included in this readme with the additional<br>
-extensions, and will be updated as I go. <br>
+## Cores    [![Badge GPLv3]][GPLv3]
 
-**Example:** Crash Bandicoot.psx.zip
+All files ending in `.data` have been compiled with **[RetroArch]**.
 
-To use systems that require a bios, like psx, <br>
-add the bios under the **BIOS** folder and name <br>
-it the according system .bin <br>
+*Check my **[Fork]** for changes made to the original software.*
 
-**Example:** psx.bin 
+<br>
+<br>
+<br>
+
+## Building
+
+*Instructions have only been confirmed working for **Ubuntu**.*
 
 <br>
 
-## Installation
+### Dependencies
 
-This is a drag and drop extension, with the <br>
-exception that it requires something to host <br>
-PHP files like XAMPP. Put your roms in the <br>
-/roms/ folder and bios in the /bios/ folder, <br>
-following the naming scheme shown here.
+- **[Build Essential]**
+- **[PkgConf]**
+- **[BinUtils]**
+- **[Python]**
+- **[Git]**
 
+<br>
 
-### Extensions
-The following extensions are used in <br>
-addition to common file extensions <br>
+```sh
+sudo apt install -y         \
+    binutils-mips-linux-gnu \
+    build-essential         \
+    pkgconf                 \
+    python3                 \
+    git 
+```
 
-PlayStation - .psx.*
+<br>
+<br>
 
-## Contributions
+### WASM
 
-Any (positive) additions or changes are welcome and encouraged.
+1. **Clone** the repository.
+
+    ```sh
+    git clone https://github.com/ethanaobrien/RetroArch.git
+    ```
+    
+<br>    
+
+2. Navigate to `/dist-scripts/`
+
+<br>
+
+3. Build with:
+
+    ```sh
+    emmake ./dist-cores.sh emscripten
+    ```
+
+<br>
+<br>
+
+### LibRetro
+
+1. **Clone** the repository.
+
+    ```sh
+    git clone https://github.com/libretro/libretro-fceumm.git
+    ```
+
+<br>
+
+2. The next steps depend on whether or <br>
+   not you have a `Makefile.libretro` .
+   
+   <br>
+   
+   #### With
+   
+   - Navigate to the folder with the makefile.
+   
+   - Build with:
+   
+       ```sh
+       emmake make -f Makefile.libretro platform=emscripten
+       ```
+   
+   <br>
+   
+   #### Without
+   
+   - Stay in the base directory of the project.
+   
+   - Build with:
+   
+       ```sh
+       emmake make platform=emscripten
+       ```
+
+<br>
+
+3. Copy the `.bc` file to the `/dist-cores/` folder.
+
+<br>
 
 
 <!----------------------------------------------------------------------------->
 
-[Badge License]: https://img.shields.io/badge/license-GPL-blue
+[RetroArch]: https://github.com/libretro/RetroArch
+[Fork]: https://github.com/ethanaobrien/RetroArch
 
-[EmulatorJS]: https://github.com/ElectronicsArchiver/emulatorjs
+[GPLv3]: cores/LICENSE
 
-[`Library.php`]: Source/Library.php
+<!-------------------------------{ Dependencies }------------------------------>
 
-[License]: #
-                
+[Build Essential]: https://packages.ubuntu.com/focal/build-essential
+[BinUtils]: https://www.gnu.org/software/binutils/
+[PkgConf]: http://pkgconf.org/
+[Python]: https://www.python.org/
+[Git]: https://git-scm.com/
+
+<!---------------------------------{ Badges }---------------------------------->
+
+[Badge GPLv3]: https://img.shields.io/badge/License-GPL_3-blue.svg?style=flat
