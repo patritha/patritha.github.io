@@ -1,0 +1,21 @@
+body	{
+	background-color: black;
+	background-image: url('images/ryan.jpg');
+	@font-face {
+ 	font-family: comicsans;
+  	src: url(comic.ttf);
+	}
+	{
+ 	font-family: comicsans;
+	}
+	
+
+}
+h1	{
+	color: black;
+	background-color: DodgerBlue;
+}
+p	{
+	color: #17fc03;
+	background-color: black;
+}
